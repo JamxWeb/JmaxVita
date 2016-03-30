@@ -1,34 +1,5 @@
-/**
- * impress.js
- *
- * impress.js is a presentation tool based on the power of CSS3 transforms and transitions
- * in modern browsers and inspired by the idea behind prezi.com.
- *
- *
- * Copyright 2011-2012 Bartek Szopka (@bartaz)
- *
- * Released under the MIT and GPL Licenses.
- *
- * ------------------------------------------------
- *  author:  Bartek Szopka
- *  version: 0.5.3
- *  url:     http://bartaz.github.com/impress.js/
- *  source:  http://github.com/bartaz/impress.js/
- */
-
-/*jshint bitwise:true, curly:true, eqeqeq:true, forin:true, latedef:true, newcap:true,
-         noarg:true, noempty:true, undef:true, strict:true, browser:true */
-
-// You are one of those who like to know how things work inside?
-// Let me show you the cogs that make impress.js run...
 (function ( document, window ) {
     'use strict';
-    
-    // HELPER FUNCTIONS
-    
-    // `pfx` is a function that takes a standard CSS property name as a parameter
-    // and returns it's prefixed version valid for current browser it runs in.
-    // The code is heavily inspired by Modernizr http://www.modernizr.com/
     var pfx = (function () {
         
         var style = document.createElement('dummy').style,
@@ -55,16 +26,9 @@
         };
     
     })();
-    
-    // `arraify` takes an array-like object and turns it into real Array
-    // to make all the Array.prototype goodness available.
     var arrayify = function ( a ) {
         return [].slice.call( a );
     };
-    
-    // `css` function applies the styles given in `props` object to the element
-    // given as `el`. It runs all property names through `pfx` function to make
-    // sure proper prefixed version of the property is used.
     var css = function ( el, props ) {
         var key, pkey;
         for ( key in props ) {
@@ -77,35 +41,20 @@
         }
         return el;
     };
-    
-    // `toNumber` takes a value given as `numeric` parameter and tries to turn
-    // it into a number. If it is not possible it returns 0 (or other value
-    // given as `fallback`).
     var toNumber = function (numeric, fallback) {
         return isNaN(numeric) ? (fallback || 0) : Number(numeric);
     };
-    
-    // `byId` returns element with given `id` - you probably have guessed that ;)
     var byId = function ( id ) {
         return document.getElementById(id);
     };
-    
-    // `$` returns first element for given CSS `selector` in the `context` of
-    // the given element or whole document.
     var $ = function ( selector, context ) {
         context = context || document;
         return context.querySelector(selector);
     };
-    
-    // `$$` return an array of elements for given CSS `selector` in the `context` of
-    // the given element or whole document.
     var $$ = function ( selector, context ) {
         context = context || document;
         return arrayify( context.querySelectorAll(selector) );
     };
-    
-    // `triggerEvent` builds a custom DOM event with given `eventName` and `detail` data
-    // and triggers it on element given as `el`.
     var triggerEvent = function (el, eventName, detail) {
         var event = document.createEvent("CustomEvent");
         event.initCustomEvent(eventName, true, true, detail);
